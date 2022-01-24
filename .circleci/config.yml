@@ -29,6 +29,9 @@ jobs:
       - run:
           name: Run build
           command: |
+            pwd
+            ls -l
+            ls -l build
             npm run build
       - persist_to_workspace:
           root: ~/
