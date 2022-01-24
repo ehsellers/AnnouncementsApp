@@ -31,7 +31,7 @@ jobs:
           command: |
             npm run build
       - persist_to_workspace:
-          root: workspace
+          root: ./
           paths:
             - build
   deploy:
