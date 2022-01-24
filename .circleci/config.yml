@@ -30,6 +30,10 @@ jobs:
           name: Run build
           command: |
             npm run build
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - build
   deploy:
     docker:
       - image: cimg/node:16.10
@@ -42,8 +46,10 @@ jobs:
           name: deploy to Linode server
           command: |
             pwd
+            ls -l
+            tar -czvf new-build.tar.gz build
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
-            echo $LINODE_SERVER
+            scp new-build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/.
             ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; pwd; ls -l";
 
 workflows:
