@@ -49,7 +49,7 @@ jobs:
             tar -czvf build.tar.gz $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
             scp build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/build.tar.gz
-            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; tar -xzf build.tar.gz; rm current-staging; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 current-$CIRCLE_BRANCH";
+            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; tar -xzf build.tar.gz; rm current-$CIRCLE_BRANCH; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 current-$CIRCLE_BRANCH";
 
 workflows:
   deploy-announcements-app:
