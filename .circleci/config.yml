@@ -41,7 +41,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "SHA256:8gfQRLMy1D21AlNnSR+mHRybz5pIBTPGRy4DL3ABxJA"
-      - checkout # check out the code in the project directory
       - run:
           name: deploy to Linode server
           command: |
@@ -52,7 +51,7 @@ jobs:
             tar -czvf build.tar.gz $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
             scp build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/build.tar.gz
-            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; tar -xzf build.tar.gz; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 current";
+            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; tar -xzf build.tar.gz; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 current-staging";
 
 workflows:
   # Below is the definition of your workflow.
@@ -61,6 +60,7 @@ workflows:
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   deploy-announcements-app:
     jobs:
-      - deploy
-      # For running simple node tests, you could optionally use the node/test job from the orb to replicate and replace the job above in fewer lines.
-      # - node/test
+      - build
+      - deploy:
+          requires:
+            - build
