@@ -44,6 +44,7 @@ jobs:
       - run:
           name: deploy to Linode server
           command: |
+            echo $LINODE_SERVER
             ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER 
             "cd $APP_DIR; 
             pwd;
