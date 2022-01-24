@@ -28,7 +28,9 @@ jobs:
           pkg-manager: npm
       - run:
           name: Run install and build
-          command: npm install && npm run build
+          command: |
+            npm install
+            npm run build
 
 workflows:
   # Below is the definition of your workflow.
