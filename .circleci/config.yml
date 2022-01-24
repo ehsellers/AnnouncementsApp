@@ -48,10 +48,11 @@ jobs:
             pwd
             ls -l
             ls -l ./build
-            tar -czvf new-build.tar.gz build
+            mv build $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
+            tar -czvf build.tar.gz $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
-            scp new-build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/.
-            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; pwd; ls -l";
+            scp new-build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/$CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1.tar.gz
+            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; tar-xzf build.tar.gz; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 current";
 
 workflows:
   # Below is the definition of your workflow.
