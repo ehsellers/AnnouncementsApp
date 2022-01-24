@@ -35,7 +35,13 @@ jobs:
       - image: cimg/node:16.10
     steps:
       - checkout # check out the code in the project directory
-      - run: echo "the deploy step will go here" # run the `echo` command
+      - run:
+          name: deploy to Linode server
+          command: |
+            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER 
+            "cd $APP_DIR; 
+            pwd;
+            ls -l;
 
 workflows:
   # Below is the definition of your workflow.
