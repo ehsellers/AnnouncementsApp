@@ -43,7 +43,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project/build
+          at: ~/project
       - add_ssh_keys:
           fingerprints:
             - "SHA256:8gfQRLMy1D21AlNnSR+mHRybz5pIBTPGRy4DL3ABxJA"
