@@ -34,6 +34,9 @@ jobs:
     docker:
       - image: cimg/node:16.10
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:2L6aL3GOBUrukC9BcmamZXuFz8JZGGQPUuYH9t2QHxg"
       - checkout # check out the code in the project directory
       - run:
           name: deploy to Linode server
