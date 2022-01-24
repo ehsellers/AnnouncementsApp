@@ -42,7 +42,7 @@ jobs:
       - image: cimg/node:16.10
     steps:
       - attach_workspace:
-          at: ~/build
+          at: ~/project/build
       - add_ssh_keys:
           fingerprints:
             - "SHA256:8gfQRLMy1D21AlNnSR+mHRybz5pIBTPGRy4DL3ABxJA"
@@ -51,7 +51,7 @@ jobs:
           command: |
             pwd
             ls -l
-            ls -l ./build
+            ls -l build
             mv build $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
             tar -czvf build.tar.gz $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
