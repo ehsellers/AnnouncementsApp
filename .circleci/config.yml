@@ -47,6 +47,7 @@ jobs:
           command: |
             pwd
             ls -l
+            ls -l ./build
             tar -czvf new-build.tar.gz build
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
             scp new-build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/.
