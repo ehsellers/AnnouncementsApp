@@ -36,10 +36,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:2L6aL3GOBUrukC9BcmamZXuFz8JZGGQPUuYH9t2QHxg"
             - "SHA256:8gfQRLMy1D21AlNnSR+mHRybz5pIBTPGRy4DL3ABxJA"
-            - "SHA256:2L6aL3GOBUrukC9BcmamZXuFz8JZGGQPUuYH9t2QHxg."
-            - "SHA256:8gfQRLMy1D21AlNnSR+mHRybz5pIBTPGRy4DL3ABxJA circleci-deploy@localhost"
       - checkout # check out the code in the project directory
       - run:
           name: deploy to Linode server
