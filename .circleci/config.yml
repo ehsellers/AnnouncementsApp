@@ -31,13 +31,15 @@ jobs:
           command: |
             npm run build
       - persist_to_workspace:
-          root: ./
+          root: ~/
           paths:
             - build
   deploy:
     docker:
       - image: cimg/node:16.10
     steps:
+      - attach_workspace:
+          at: ~/build
       - add_ssh_keys:
           fingerprints:
             - "SHA256:8gfQRLMy1D21AlNnSR+mHRybz5pIBTPGRy4DL3ABxJA"
