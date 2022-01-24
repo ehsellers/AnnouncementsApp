@@ -27,10 +27,10 @@ jobs:
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: npm
       - run:
-          name: Run build
+          name: Run install and build
           command: 
-            npm run build
             npm install
+            npm run build
 
 workflows:
   # Below is the definition of your workflow.
