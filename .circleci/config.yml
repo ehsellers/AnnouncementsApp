@@ -51,7 +51,7 @@ jobs:
             mv build $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
             tar -czvf build.tar.gz $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
-            scp build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/$CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1.tar.gz
+            scp build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/build.tar.gz
             ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; tar-xzf build.tar.gz; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 current";
 
 workflows:
