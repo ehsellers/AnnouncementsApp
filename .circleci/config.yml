@@ -1,0 +1,60 @@
+# Announcements App deployment workflow
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+general:
+  branches:
+    only:
+     - main
+     - staging
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run build
+          command: |
+            pwd
+            ls -l
+            ls -l build
+            npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - build
+  deploy:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:8gfQRLMy1D21AlNnSR+mHRybz5pIBTPGRy4DL3ABxJA"
+      - run:
+          name: deploy to Linode server
+          command: |
+            pwd
+            ls -l
+            ls -l build
+            mv build $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
+            tar -czvf build.tar.gz $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
+            ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
+            scp build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/build.tar.gz
+            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; tar -xzf build.tar.gz; rm current-$CIRCLE_BRANCH; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 current-$CIRCLE_BRANCH";
+
+workflows:
+  deploy-announcements-app:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
