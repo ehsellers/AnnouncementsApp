@@ -10,7 +10,9 @@ function Events({ match, history }) {
     useEffect(() => {
         let getNote = async () => {
             if(noteId === 'new') return
-    
+            
+            let noteData = {"id": 0, "Name": "", "Description": ""};
+            setNote(noteData);
             let response = await fetch(`https://script.google.com/macros/s/AKfycbxE_I6nUHJWdnV2C4YftCMVti04k6DGHakr12UzYFqM50YGmryXhILhg5pas_NumEjO/exec`)
             let data = await response.json()
             let noteData = data[noteId];
