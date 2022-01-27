@@ -11,16 +11,15 @@ function Events({ match, history }) {
 
         getNote()
 
+        let getNote = async () => {
+            if(noteId === 'new') return
+    
+            let response = await fetch(`https://script.google.com/macros/s/AKfycbxE_I6nUHJWdnV2C4YftCMVti04k6DGHakr12UzYFqM50YGmryXhILhg5pas_NumEjO/exec`)
+            let data = await response.json()
+            let noteData = data[noteId];
+            setNote(noteData)
+        }
     }, [noteId])
-
-    let getNote = async () => {
-        if(noteId === 'new') return
-
-        let response = await fetch(`https://script.google.com/macros/s/AKfycbxE_I6nUHJWdnV2C4YftCMVti04k6DGHakr12UzYFqM50YGmryXhILhg5pas_NumEjO/exec`)
-        let data = await response.json()
-        let noteData = data[noteId];
-        setNote(noteData)
-    }
 
     let handleSubmit = () => {
         history.push('/')
