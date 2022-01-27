@@ -10,7 +10,7 @@ const EventsPage = () => {
     }, [])
 
     let getNotes = async () => {
-        let response = await fetch('https://script.google.com/macros/s/AKfycbydIiiUyhAeP4Y-Hr2aAPR15gOKMC0X4_UsfQ7nR1PYPcgsZsF1-O9t8vVbhyPkq_gT/exec')
+        let response = await fetch('https://script.google.com/macros/s/AKfycbxE_I6nUHJWdnV2C4YftCMVti04k6DGHakr12UzYFqM50YGmryXhILhg5pas_NumEjO/exec')
         let data = await response.json()
 
         setNotes(data)
