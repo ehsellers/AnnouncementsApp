@@ -8,9 +8,6 @@ function Events({ match, history }) {
     let [note, setNote] = useState(null)
 
     useEffect(() => {
-
-        getNote()
-
         let getNote = async () => {
             if(noteId === 'new') return
     
@@ -19,6 +16,8 @@ function Events({ match, history }) {
             let noteData = data[noteId];
             setNote(noteData)
         }
+
+        getNote()
     }, [noteId])
 
     let handleSubmit = () => {
