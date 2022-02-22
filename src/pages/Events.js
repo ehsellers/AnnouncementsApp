@@ -23,7 +23,7 @@ function Events({ match, history }) {
         }
 
         getNote()
-    }, [noteId])
+    }, [noteId, des, n])
 
     let handleSubmit = () => {
         history.push('/')
