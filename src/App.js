@@ -16,7 +16,7 @@ function App() {
         <div className="app">
           <Title />
           <Route path="/" component={EventsPage} exact />
-          <Route path="/:id" component={Events} />
+          <Route path="/:id/:Name" component={Events} />
         </div>
       </div>
     </Router>

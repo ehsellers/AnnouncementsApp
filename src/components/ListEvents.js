@@ -24,15 +24,27 @@ let getTitle = (note) => {
 
         return title
 }
-
+        /*<Link to={{
+            path:`/${note.id}/${note.Name}`,
+             state:`${note.Description}`
+            }}>
+            <div className='notes-list-item'>
+                <h3>{getTitle(note)}</h3>
+                <p><span>{getTime(note)}</span>{getHour(note)}</p>
+            </div>
+        </Link>*/
 const ListEvents = ({ note }) => {
     return (
-        <Link to={`/${note.id}`}>
+        <Link to={{
+            pathname: `/${note.id}/${note.Name}`,
+            state: `${note.Description}`
+        }}>
             <div className='notes-list-item'>
                 <h3>{getTitle(note)}</h3>
                 <p><span>{getTime(note)}</span>{getHour(note)}</p>
             </div>
         </Link>
+        
     )
 }
 
