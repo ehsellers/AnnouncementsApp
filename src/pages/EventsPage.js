@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import ListEvents from '../components/ListEvents'
 
+let info;
 const EventsPage = (props) => {
 
-    let [notes, setNotes] = useState([])
-    //console.log(notes);
+    const [notes, setNotes] = useState([]);
+
     useEffect(() => {
         getNotes()
     }, [])
-
     
     let getNotes = async () => {
-        let response = await fetch('https://script.google.com/macros/s/AKfycbyp2Df6JaTX845alLGEHv3Q0EOr2i2YISnXnDUfcxlkXGUzpAUgBBr2tSld3ezQLItd/exec')
-        let data = await response.json()
-        //let data = props.location.state;
-        //console.log(data)
-        setNotes(data)
+        let data =[];
+        if(info == null){
+            let response = await fetch('https://script.google.com/macros/s/AKfycbyp2Df6JaTX845alLGEHv3Q0EOr2i2YISnXnDUfcxlkXGUzpAUgBBr2tSld3ezQLItd/exec')
+            data = await response.json();
+            info = data;
+        }
+        setNotes(info)
     }
 
     return (
