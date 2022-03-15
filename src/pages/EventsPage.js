@@ -13,7 +13,7 @@ const EventsPage = (props) => {
     let getNotes = async () => {
         let data =[];
         if(info == null){
-            let response = await fetch('https://script.google.com/macros/s/AKfycbyp2Df6JaTX845alLGEHv3Q0EOr2i2YISnXnDUfcxlkXGUzpAUgBBr2tSld3ezQLItd/exec')
+            let response = await fetch('https://script.google.com/macros/s/AKfycbzCaQnqGd52ggMfxtfL8w4XigYtwnqPWN0jD37bvK787yb-s7jvKT3rkNFFcw0BelfBVA/exec')
             data = await response.json();
             info = data;
         }
