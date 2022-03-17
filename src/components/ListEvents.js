@@ -12,6 +12,7 @@ let getHour = (note) => {
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     min = min < 10 ? "0" + min : min;
+    console.log(min);
     return "\t" + hours + ":" + min + " " + label;
 }
 
