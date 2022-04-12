@@ -7,8 +7,13 @@ let getTime = (note) => {
 
 let getHour = (note) => {
     var hours = new Date(note.Time).getHours()
+    var defaultTime = "";
     var min = new Date(note.Time).getMinutes()
     var label = hours < 12 ? "am" : "pm";
+    if(note.Time == "")
+    {
+        return defaultTime;
+    }
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     min = min < 10 ? "0" + min : min;

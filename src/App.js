@@ -6,6 +6,7 @@ import {
 import Title from './components/Title';
 import EventsPage from './pages/EventsPage';
 import Events from './pages/Events';
+//import Select from 'react-select';
 
 import './App.css';
 

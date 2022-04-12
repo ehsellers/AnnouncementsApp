@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ReactComponent as BackArrow } from '../assets/back-arrow.svg'
+//import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
+ 
 
 function Events({ match, history }) {
     let noteId = match.params.id
@@ -8,6 +10,7 @@ function Events({ match, history }) {
     let des = location.state
     let n = match.params.Name
     let [note, setNote] = useState(null)
+    //ScrollBox = require('react-scroll-box').ScrollBox; 
 
     useEffect(() => {
         let getNote = async () => {
@@ -28,7 +31,9 @@ function Events({ match, history }) {
     let handleSubmit = () => {
         history.push('/')
     }
-    
+    /*<ScrollBox style={{height: '200px'}} axes={ScrollAxes.Y} fastTrack={FastTrack.PAGING}>
+                <textarea onChange={(e) => {setNote({...note, 'body':e.target.value})}} value={note?.Name + "\n\n" + note?.Description}></textarea>
+            </ScrollBox>*/
     return (
         <div className="note">
 
@@ -39,7 +44,7 @@ function Events({ match, history }) {
                     </Link>
                 </h3>
             </div>
-
+ 
             <textarea onChange={(e) => {setNote({...note, 'body':e.target.value})}} value={note?.Name + "\n\n" + note?.Description}></textarea>
             
         </div>
