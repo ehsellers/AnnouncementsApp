@@ -10,7 +10,7 @@ let getHour = (note) => {
     var defaultTime = "";
     var min = new Date(note.Time).getMinutes()
     var label = hours < 12 ? "am" : "pm";
-    if(note.Time == "")
+    if(note.Time === "")
     {
         return defaultTime;
     }
