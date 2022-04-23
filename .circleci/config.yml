@@ -29,6 +29,24 @@ jobs:
           root: ~/project
           paths:
             - build
+  build-subdir:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run build
+          command: |
+            pwd
+            ls -l
+            ls -l build
+            PUBLIC_URL=/announcements npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - build-subdir
   deploy:
     docker:
       - image: cimg/node:16.10
@@ -55,6 +73,7 @@ workflows:
   deploy-announcements-app:
     jobs:
       - build
+      - build-subdir
       - deploy:
           requires:
             - build
