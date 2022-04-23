@@ -43,6 +43,7 @@ jobs:
             ls -l
             ls -l build
             PUBLIC_URL=/announcements BUILD_PATH='./build-subdir' npm run build
+            cat build-subdir/index.html
       - persist_to_workspace:
           root: ~/project
           paths:
