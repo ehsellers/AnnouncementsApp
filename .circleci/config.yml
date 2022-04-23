@@ -72,7 +72,7 @@ jobs:
             tar -czvf build-subdir.tar.gz $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
             scp build-subdir.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$BHS_PORTAL_DIR/build-subdir.tar.gz
-            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $BHS_PORTAL_DIR; tar -xzf build-subdir.tar.gz; rm www-root/announcements; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 www-root/announcements";
+            ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $BHS_PORTAL_DIR; tar -xzf build-subdir.tar.gz; rm www-root/announcements; ln -sf ../$CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 www-root/announcements";
 workflows:
   deploy-announcements-app:
     jobs:
