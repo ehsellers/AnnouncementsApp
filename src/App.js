@@ -16,8 +16,8 @@ function App() {
       <div className="container dark">
         <div className="app">
           <Title />
-          <Route path="/" component={EventsPage} exact />
-          <Route path="/:id/:Name" component={Events} />
+          <Route path="/announcements" component={EventsPage} exact />
+          <Route path="/announcements/:id/:Name" component={Events} />
         </div>
       </div>
     </Router>

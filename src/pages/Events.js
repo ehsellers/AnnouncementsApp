@@ -29,7 +29,7 @@ function Events({ match, history }) {
     }, [noteId, des, n])
 
     let handleSubmit = () => {
-        history.push('/')
+        history.push('/announcements')
     }
     /*<ScrollBox style={{height: '200px'}} axes={ScrollAxes.Y} fastTrack={FastTrack.PAGING}>
                 <textarea onChange={(e) => {setNote({...note, 'body':e.target.value})}} value={note?.Name + "\n\n" + note?.Description}></textarea>
@@ -39,7 +39,7 @@ function Events({ match, history }) {
 
             <div className="note-header">
                 <h3>
-                    <Link to="/">
+                    <Link to="/announcements">
                         <BackArrow onClick={handleSubmit} />
                     </Link>
                 </h3>
