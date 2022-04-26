@@ -42,7 +42,7 @@ let getTitle = (note) => {
 const ListEvents = ({ note }) => {
     return (
         <Link to={{
-            pathname: `/${note.id}/${note.Name}`,
+            pathname: `/announcements/${note.id}/${note.Name}`,
             state: `${note.Description}`
         }}>
             <div className='notes-list-item'>
