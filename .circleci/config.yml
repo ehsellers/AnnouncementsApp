@@ -94,11 +94,29 @@ jobs:
 workflows:
   deploy-announcements-app:
     jobs:
-      - build
-      - build-subdir
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+                - staging
+      - build-subdir:
+          filters:
+            branches:
+              only:
+                - uncleBilly
       - deploy:
+          filters:
+            branches:
+              only:
+                - main
+                - staging
           requires:
             - build
       - deploy-subdir:
+          filters:
+            branches:
+              only:
+                - uncleBilly
           requires:
             - build-subdir
