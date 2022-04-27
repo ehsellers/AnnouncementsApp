@@ -91,25 +91,23 @@ workflows:
           filters:
             branches:
               only:
-                - main
-                - staging
+                - test
       - build-subdir:
           filters:
             branches:
               only:
-                - uncleBilly
+                - main
       - deploy:
           filters:
             branches:
               only:
-                - main
-                - staging
+                - test
           requires:
             - build
       - deploy-subdir:
           filters:
             branches:
               only:
-                - uncleBilly
+                - main
           requires:
             - build-subdir
