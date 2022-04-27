@@ -5,18 +5,14 @@ orbs:
   node: circleci/node@4.7
 
 general:
-  branches:
-    only:
-     - main
-     - staging
+  filters:
+    branches:
+      only:
+       - main
+       - staging
 
 jobs:
   build:
-    filters:
-      branches:
-        only:
-          - main
-          - staging
     docker:
       - image: cimg/node:16.10
     steps:
@@ -35,10 +31,6 @@ jobs:
           paths:
             - build
   build-subdir:
-    filters:
-      branches:
-        only:
-          - uncleBilly
     docker:
       - image: cimg/node:16.10
     steps:
@@ -58,11 +50,6 @@ jobs:
           paths:
             - build-subdir
   deploy:
-    filters:
-      branches:
-        only:
-          - main
-          - staging
     docker:
       - image: cimg/node:16.10
     steps:
@@ -84,10 +71,6 @@ jobs:
             scp build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/build.tar.gz
             ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; tar -xzf build.tar.gz; rm current-$CIRCLE_BRANCH; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 current-$CIRCLE_BRANCH";
   deploy-subdir:
-    filters:
-      branches:
-        only:
-          - uncleBilly
     docker:
       - image: cimg/node:16.10
     steps:
