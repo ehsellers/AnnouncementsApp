@@ -12,6 +12,11 @@ general:
 
 jobs:
   build:
+    filters:
+      branches:
+        only:
+          - main
+          - staging
     docker:
       - image: cimg/node:16.10
     steps:
@@ -30,6 +35,10 @@ jobs:
           paths:
             - build
   build-subdir:
+    filters:
+      branches:
+        only:
+          - uncleBilly
     docker:
       - image: cimg/node:16.10
     steps:
@@ -42,13 +51,18 @@ jobs:
             pwd
             ls -l
             ls -l build
-            PUBLIC_URL=/ BUILD_PATH='./build-subdir' npm run build
+            PUBLIC_URL=/announcements BUILD_PATH='./build-subdir' npm run build
             cat build-subdir/index.html
       - persist_to_workspace:
           root: ~/project
           paths:
             - build-subdir
   deploy:
+    filters:
+      branches:
+        only:
+          - main
+          - staging
     docker:
       - image: cimg/node:16.10
     steps:
@@ -69,6 +83,26 @@ jobs:
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
             scp build.tar.gz $LINODE_SERVER_USER@$LINODE_SERVER:$APP_DIR/build.tar.gz
             ssh -p 22 $LINODE_SERVER_USER@$LINODE_SERVER "cd $APP_DIR; tar -xzf build.tar.gz; rm current-$CIRCLE_BRANCH; ln -sf $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1 current-$CIRCLE_BRANCH";
+  deploy-subdir:
+    filters:
+      branches:
+        only:
+          - uncleBilly
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:8gfQRLMy1D21AlNnSR+mHRybz5pIBTPGRy4DL3ABxJA"
+      - run:
+          name: deploy to Linode server
+          command: |
+            pwd
+            ls -l
+            ls -l build
             mv build-subdir $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1-subdir
             tar -czvf build-subdir.tar.gz $CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1-subdir
             ssh-keyscan $LINODE_SERVER >> ~/.ssh/known_hosts
@@ -82,4 +116,6 @@ workflows:
       - deploy:
           requires:
             - build
+      - deploy-subdir:
+          requires:
             - build-subdir
