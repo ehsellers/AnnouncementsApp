@@ -3,6 +3,9 @@ import {
   Route
 } from "react-router-dom";
 
+import React, {useEffect } from 'react';
+import ReactGA from 'react-ga';
+const TRACKING_ID = "UA-228520279-1"; // OUR_TRACKING_ID
 import Title from './components/Title';
 import EventsPage from './pages/EventsPage';
 import Events from './pages/Events';
@@ -10,7 +13,14 @@ import Events from './pages/Events';
 
 import './App.css';
 
+ReactGA.initialize(TRACKING_ID);
+
 function App() {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
   return (
     <Router>
       <div className="container dark">
