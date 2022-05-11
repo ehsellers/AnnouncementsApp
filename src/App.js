@@ -5,13 +5,14 @@ import {
 
 import React, {useEffect } from 'react';
 import ReactGA from 'react-ga';
-const TRACKING_ID = "UA-228520279-1"; // OUR_TRACKING_ID
 import Title from './components/Title';
 import EventsPage from './pages/EventsPage';
 import Events from './pages/Events';
 //import Select from 'react-select';
 
 import './App.css';
+
+const TRACKING_ID = "UA-228520279-1";
 
 ReactGA.initialize(TRACKING_ID);
 
