@@ -50,14 +50,7 @@ a {
 }
 
 /* APP STYLES */
-.loader {
-  width: 100%;
-  position:absolute;
-  margin-left: 200px;
-  margin-top: 300px;
-  display: flex;
-  align-items:center;
-}
+
 
 .container {
   width: 100%;
