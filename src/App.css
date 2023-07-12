@@ -53,8 +53,13 @@ a {
 .loader {
   width: 100%;
   position:absolute;
+<<<<<<< HEAD
   margin-left: 200px;
   margin-top: 300px;
+=======
+  margin-left: 175px;
+  margin-top: 250px;
+>>>>>>> 5440117c22f38f2c5b9b93ca817d07f9738b4390
   display: flex;
   align-items:center;
 }
