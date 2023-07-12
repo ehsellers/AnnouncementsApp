@@ -13,7 +13,7 @@ const categories = (props) => {
     let getNotes = async () => {
         let data =[];
         if(info == null){
-            let response = await fetch('https://script.google.com/macros/s/AKfycbw-cJgkrvw4YvSKfJb7Yxwo4fNlLJ7em48wlFAghP5sUjosw5UQHLOwWg-bdVPz--3X/exec')
+            let response = await fetch('https://script.google.com/macros/s/AKfycbxmu44qEqowGNklSs-lOgAWMHmtD1liakiJEujq7mBbFyGyiV1s_-xYO6dnB4d86Vct/exec')
             data = await response.json();
             info = data;
         }
