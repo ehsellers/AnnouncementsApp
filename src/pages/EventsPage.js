@@ -17,7 +17,6 @@ const EventsPage = (props) => {
     let getNotes = async () => {
         let data =[];
         if(info == null){
-
             let response = await fetch('https://script.google.com/a/macros/barnegatschools.com/s/AKfycbyOPup51Oa-fC0PCLi3tTn6aujQGir_pUIVepjJd0ctbasVTfxaxUsrfu0vXmY630HZ/exec');
             setLoading(false)
             data = await response.json();
